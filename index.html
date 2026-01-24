@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Páginas Infinitas - Livros Amazon</title>
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1047171654364"
+         crossorigin="anonymous"></script>
+    
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio"></script>
     <script>
         tailwind.config = {
@@ -110,6 +115,27 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
+        
+        /* 🆕 Carrossel horizontal de categorias */
+        .category-scroll {
+            overflow-x: auto;
+            overflow-y: hidden;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .category-scroll::-webkit-scrollbar {
+            display: none;
+        }
+        
+        /* 🆕 Modal responsivo para mobile */
+        @media (max-width: 640px) {
+            .modal-content-mobile {
+                max-height: 85vh;
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+        }
     </style>
 </head>
 <body class="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 transition-all duration-300">
@@ -127,7 +153,7 @@
                 <h1 class="text-xl sm:text-2xl font-bold gradient-text">Páginas Infinitas</h1>
             </div>
             
-            <!-- NOVO: Menu de Navegação -->
+            <!-- Menu de Navegação -->
             <nav class="hidden md:flex items-center gap-6">
                 <a href="index.html" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 font-medium">
                     Home
@@ -158,7 +184,7 @@
             </div>
         </div>
         
-        <!-- NOVO: Menu Mobile (aparece só no celular) -->
+        <!-- Menu Mobile -->
         <nav class="md:hidden flex items-center justify-center gap-4 mt-3 pt-3 border-t border-gray-200 dark:border-gray-700">
             <a href="index.html" class="text-sm text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 font-medium">
                 Home
@@ -187,12 +213,14 @@
         </div>
     </div>
 
-    <!-- Filtros -->
-    <div class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 sticky top-[72px] z-40 shadow-sm">
+    <!-- 🆕 Filtros com carrossel horizontal no mobile -->
+    <div class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 sticky top-[72px] sm:top-[88px] z-40 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
             <div class="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
-                <div class="flex flex-wrap gap-2 w-full sm:w-auto" id="categoryFilters"></div>
-                <div class="flex gap-2">
+                <!-- Carrossel de categorias -->
+                <div class="category-scroll flex gap-2 w-full sm:w-auto pb-2 sm:pb-0" id="categoryFilters"></div>
+                
+                <div class="flex gap-2 flex-shrink-0">
                     <button onclick="setViewMode('grid')" id="gridBtn" class="p-2 sm:p-3 rounded-xl bg-blue-100 text-blue-600 dark:bg-blue-900 dark:text-blue-300 transition-all duration-200 shadow-md hover:shadow-lg">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
@@ -243,7 +271,6 @@
         </div>
     </footer>
 
-    <!-- Modals (mantendo os mesmos do código original) -->
     <!-- Modal Login Admin -->
     <div id="adminModal" class="hidden fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm flex items-center justify-center z-50 p-4 modal-enter">
         <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 sm:p-8 max-w-md w-full shadow-2xl animate-scale-in">
@@ -314,9 +341,9 @@
         </div>
     </div>
 
-    <!-- Modal Detalhes -->
-    <div id="detailModal" class="hidden fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm flex items-center justify-center z-50 p-4 overflow-y-auto modal-enter">
-        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 max-w-2xl w-full my-8 shadow-2xl animate-scale-in" id="detailContent"></div>
+    <!-- 🆕 Modal Detalhes - AJUSTADO PARA MOBILE -->
+    <div id="detailModal" class="hidden fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm flex items-center justify-center z-50 p-4 modal-enter" onclick="closeDetail()">
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 max-w-2xl w-full shadow-2xl modal-content-mobile" id="detailContent" onclick="event.stopPropagation()"></div>
     </div>
 
     <!-- Firebase SDK -->
@@ -380,7 +407,6 @@
                         window.categories = catsSnap.val();
                     }
                 } else {
-                    // Fallback localStorage
                     const saved = localStorage.getItem('books');
                     if (saved) window.books = JSON.parse(saved);
                 }
@@ -435,7 +461,6 @@
             });
         }
 
-        // RESTANTE DAS FUNÇÕES (mantendo do código original)
         window.toggleDarkMode = function() {
             document.documentElement.classList.toggle('dark');
             localStorage.setItem('darkMode', document.documentElement.classList.contains('dark'));
@@ -491,14 +516,16 @@
         function renderCategories() {
             const container = document.getElementById('categoryFilters');
             const isDark = document.documentElement.classList.contains('dark');
+            
+            // 🆕 Usando flex-shrink-0 para evitar quebra de botões
             container.innerHTML = `
-                <button onclick="filterByCategory('all')" class="${window.selectedCategory === 'all' ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg' : `bg-white text-gray-700 hover:bg-gray-50 ${isDark ? 'dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600' : ''}`} px-4 sm:px-5 py-2 sm:py-2.5 rounded-full transition-all duration-200 text-sm sm:text-base font-medium shadow-md hover:shadow-lg">
+                <button onclick="filterByCategory('all')" class="flex-shrink-0 ${window.selectedCategory === 'all' ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg' : `bg-white text-gray-700 hover:bg-gray-50 ${isDark ? 'dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600' : ''}`} px-4 sm:px-5 py-2 sm:py-2.5 rounded-full transition-all duration-200 text-sm sm:text-base font-medium shadow-md hover:shadow-lg whitespace-nowrap">
                     Todos
                 </button>
             `;
             window.categories.forEach(cat => {
                 container.innerHTML += `
-                    <button onclick="filterByCategory('${cat}')" class="${window.selectedCategory === cat ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg' : `bg-white text-gray-700 hover:bg-gray-50 ${isDark ? 'dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600' : ''}`} px-4 sm:px-5 py-2 sm:py-2.5 rounded-full transition-all duration-200 text-sm sm:text-base font-medium shadow-md hover:shadow-lg">
+                    <button onclick="filterByCategory('${cat}')" class="flex-shrink-0 ${window.selectedCategory === cat ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg' : `bg-white text-gray-700 hover:bg-gray-50 ${isDark ? 'dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600' : ''}`} px-4 sm:px-5 py-2 sm:py-2.5 rounded-full transition-all duration-200 text-sm sm:text-base font-medium shadow-md hover:shadow-lg whitespace-nowrap">
                         ${cat}
                     </button>
                 `;
@@ -708,7 +735,6 @@
                 return;
             }
 
-            // Auto-completar https://
             if (!link.startsWith('http://') && !link.startsWith('https://')) {
                 link = 'https://' + link;
             }
@@ -743,34 +769,45 @@
             }
         };
 
+        // 🆕 FUNÇÃO SHOWDETAIL MELHORADA PARA MOBILE
         window.showDetail = function(id) {
             const book = window.books.find(b => b.id === id);
             if (!book) return;
             
             const isDark = document.documentElement.classList.contains('dark');
             document.getElementById('detailContent').innerHTML = `
-                <div class="flex justify-between items-start mb-6">
-                    <h2 class="text-2xl sm:text-3xl font-bold gradient-text pr-4">${book.title}</h2>
+                <div class="flex justify-between items-start mb-6 sticky top-0 bg-white dark:bg-gray-800 pb-4 border-b border-gray-200 dark:border-gray-700 z-10">
+                    <h2 class="text-xl sm:text-2xl md:text-3xl font-bold gradient-text pr-4 line-clamp-2">${book.title}</h2>
                     <button onclick="closeDetail()" class="text-gray-600 ${isDark ? 'dark:text-gray-400' : ''} hover:text-gray-800 text-3xl leading-none flex-shrink-0 transition-colors">×</button>
                 </div>
-                ${book.image ? `
-                    <div class="w-full max-h-96 flex justify-center bg-gradient-to-br from-blue-50 to-purple-50 ${isDark ? 'dark:from-gray-700 dark:to-gray-600' : ''} rounded-2xl p-6 mb-6 shadow-inner">
-                        <img src="${book.image}" alt="${book.title}" crossorigin="anonymous" class="max-w-full max-h-96 object-contain rounded-xl shadow-lg">
+                
+                <div class="space-y-4">
+                    ${book.image ? `
+                        <div class="w-full max-h-64 sm:max-h-96 flex justify-center bg-gradient-to-br from-blue-50 to-purple-50 ${isDark ? 'dark:from-gray-700 dark:to-gray-600' : ''} rounded-2xl p-4 sm:p-6 shadow-inner">
+                            <img src="${book.image}" alt="${book.title}" crossorigin="anonymous" class="max-w-full max-h-64 sm:max-h-96 object-contain rounded-xl shadow-lg">
+                        </div>
+                    ` : ''}
+                    
+                    <p class="text-base sm:text-lg text-gray-700 ${isDark ? 'dark:text-gray-300' : ''}"><strong>Autor:</strong> ${book.author}</p>
+                    
+                    ${book.category ? `<span class="inline-block px-4 py-2 bg-gradient-to-r from-blue-100 to-purple-100 text-blue-700 text-sm font-semibold rounded-full">${book.category}</span>` : ''}
+                    
+                    ${book.description ? `
+                        <div>
+                            <h3 class="font-bold text-lg sm:text-xl text-gray-900 ${isDark ? 'dark:text-white' : ''} mb-3">Descrição</h3>
+                            <p class="text-sm sm:text-base text-gray-700 ${isDark ? 'dark:text-gray-300' : ''} whitespace-pre-line leading-relaxed">${book.description}</p>
+                        </div>
+                    ` : ''}
+                    
+                    ${book.price ? `<p class="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">R$ ${book.price}</p>` : ''}
+                    
+                    <div class="sticky bottom-0 bg-white dark:bg-gray-800 pt-4 border-t border-gray-200 dark:border-gray-700 mt-6">
+                        <a href="${book.affiliateLink}" target="_blank" rel="noopener noreferrer"
+                            class="block w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white text-center py-3 sm:py-4 px-4 rounded-xl hover:shadow-2xl transition-all duration-200 font-bold text-base sm:text-lg shadow-lg">
+                            Comprar na Amazon
+                        </a>
                     </div>
-                ` : ''}
-                <p class="text-lg text-gray-700 ${isDark ? 'dark:text-gray-300' : ''} mb-3"><strong>Autor:</strong> ${book.author}</p>
-                ${book.category ? `<span class="inline-block px-4 py-2 bg-gradient-to-r from-blue-100 to-purple-100 text-blue-700 text-sm font-semibold rounded-full mb-4">${book.category}</span>` : ''}
-                ${book.description ? `
-                    <div class="mb-6">
-                        <h3 class="font-bold text-xl text-gray-900 ${isDark ? 'dark:text-white' : ''} mb-3">Descrição</h3>
-                        <p class="text-gray-700 ${isDark ? 'dark:text-gray-300' : ''} whitespace-pre-line leading-relaxed">${book.description}</p>
-                    </div>
-                ` : ''}
-                ${book.price ? `<p class="text-3xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent mb-6">R$ ${book.price}</p>` : ''}
-                <a href="${book.affiliateLink}" target="_blank" rel="noopener noreferrer"
-                    class="block w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white text-center py-4 px-4 rounded-xl hover:shadow-2xl transition-all duration-200 font-bold text-lg shadow-lg">
-                    Comprar na Amazon
-                </a>
+                </div>
             `;
             document.getElementById('detailModal').classList.remove('hidden');
         };
