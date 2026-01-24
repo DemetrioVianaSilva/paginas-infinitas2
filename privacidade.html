@@ -3,261 +3,207 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Política de Privacidade do Páginas Infinitas - Como coletamos e usamos seus dados">
     <title>Política de Privacidade - Páginas Infinitas</title>
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1047171654364"
+         crossorigin="anonymous"></script>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class'
+        }
+    </script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            line-height: 1.8;
-            color: #333;
-            background: #f8f9fa;
-        }
-
-        header {
+        .gradient-bg {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px 0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        h1 {
-            font-size: 28px;
-            margin-bottom: 10px;
-        }
-
-        .last-update {
-            font-size: 14px;
-            opacity: 0.9;
-        }
-
-        main {
-            background: white;
-            margin: 40px auto;
-            padding: 40px;
-            max-width: 900px;
-            border-radius: 12px;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
-        }
-
-        h2 {
-            color: #667eea;
-            font-size: 24px;
-            margin-top: 40px;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #f0f0f0;
-        }
-
-        h2:first-of-type {
-            margin-top: 0;
-        }
-
-        p {
-            margin-bottom: 15px;
-            text-align: justify;
-        }
-
-        ul {
-            margin: 15px 0 15px 30px;
-        }
-
-        li {
-            margin-bottom: 10px;
-        }
-
-        a {
-            color: #667eea;
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        .highlight-box {
-            background: #f0f4ff;
-            border-left: 4px solid #667eea;
-            padding: 20px;
-            margin: 25px 0;
-            border-radius: 4px;
-        }
-
-        .btn-home {
-            display: inline-block;
-            background: #667eea;
-            color: white;
-            padding: 12px 30px;
-            border-radius: 25px;
-            margin-top: 30px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .btn-home:hover {
-            background: #5568d3;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
-            text-decoration: none;
-        }
-
-        footer {
-            text-align: center;
-            padding: 30px 20px;
-            color: #666;
-            font-size: 14px;
-        }
-
-        @media (max-width: 768px) {
-            main {
-                margin: 20px;
-                padding: 25px 20px;
-            }
-
-            h1 {
-                font-size: 24px;
-            }
-
-            h2 {
-                font-size: 20px;
-            }
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
     </style>
 </head>
-<body>
-    <header>
-        <div class="container">
-            <h1>📚 Política de Privacidade</h1>
-            <p class="last-update">Última atualização: Janeiro de 2025</p>
+<body class="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
+    
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 sticky top-0 z-50 border-b border-gray-200 dark:border-gray-700 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="p-2 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl shadow-lg">
+                        <svg class="w-6 h-6 sm:w-8 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                        </svg>
+                    </div>
+                    <h1 class="text-xl sm:text-2xl font-bold gradient-text">Páginas Infinitas</h1>
+                </div>
+                
+                <nav class="hidden md:flex items-center gap-6">
+                    <a href="index.html" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 font-medium">
+                        Home
+                    </a>
+                    <a href="contato.html" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 font-medium">
+                        Contato
+                    </a>
+                    <a href="privacidade.html" class="text-blue-600 dark:text-blue-400 font-bold">
+                        Privacidade
+                    </a>
+                </nav>
+            </div>
+            
+            <!-- Menu Mobile -->
+            <nav class="md:hidden flex items-center justify-center gap-4 mt-3 pt-3 border-t border-gray-200 dark:border-gray-700">
+                <a href="index.html" class="text-sm text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 font-medium">
+                    Home
+                </a>
+                <a href="contato.html" class="text-sm text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 font-medium">
+                    Contato
+                </a>
+                <a href="privacidade.html" class="text-sm text-blue-600 dark:text-blue-400 font-bold">
+                    Privacidade
+                </a>
+            </nav>
         </div>
     </header>
 
-    <main class="container">
-        <p><strong>Bem-vindo ao Páginas Infinitas!</strong> Esta política de privacidade explica como coletamos, usamos e protegemos suas informações quando você visita nosso site.</p>
+    <!-- Conteúdo -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 sm:p-12">
+            <h2 class="text-3xl sm:text-4xl font-bold gradient-text mb-4">Política de Privacidade</h2>
+            <p class="text-sm text-gray-500 dark:text-gray-400 mb-8">Última atualização: Janeiro de 2025</p>
+            
+            <div class="space-y-8 text-gray-700 dark:text-gray-300">
+                
+                <section>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">1. Informações que Coletamos</h3>
+                    <p class="mb-3">
+                        O site <strong>Páginas Infinitas</strong> não coleta dados pessoais dos visitantes diretamente. 
+                        No entanto, utilizamos serviços de terceiros que podem coletar informações:
+                    </p>
+                    <ul class="list-disc list-inside space-y-2 ml-4">
+                        <li><strong>Cookies:</strong> Utilizamos cookies para melhorar a experiência de navegação</li>
+                        <li><strong>Amazon Associates:</strong> Links de afiliados podem registrar cliques e compras</li>
+                        <li><strong>Google AdSense:</strong> Anúncios podem coletar dados de navegação para personalização</li>
+                    </ul>
+                </section>
 
-        <h2>1. Informações que Coletamos</h2>
-        <p>O Páginas Infinitas pode coletar as seguintes informações:</p>
-        <ul>
-            <li><strong>Informações de navegação:</strong> páginas visitadas, tempo de permanência, dispositivo utilizado</li>
-            <li><strong>Cookies e tecnologias similares:</strong> para melhorar sua experiência e personalizar conteúdo</li>
-            <li><strong>Dados de interação:</strong> livros visualizados, cliques em links de afiliados</li>
-        </ul>
+                <section>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">2. Como Usamos as Informações</h3>
+                    <p>
+                        As informações coletadas por serviços de terceiros são utilizadas para:
+                    </p>
+                    <ul class="list-disc list-inside space-y-2 ml-4 mt-3">
+                        <li>Melhorar a experiência de navegação no site</li>
+                        <li>Personalizar anúncios e conteúdo</li>
+                        <li>Gerar comissões através do programa Amazon Associates</li>
+                        <li>Analisar métricas de tráfego e engajamento</li>
+                    </ul>
+                </section>
 
-        <h2>2. Como Usamos Suas Informações</h2>
-        <p>Utilizamos os dados coletados para:</p>
-        <ul>
-            <li>Melhorar a experiência de navegação no site</li>
-            <li>Analisar o comportamento dos visitantes para otimizar conteúdo</li>
-            <li>Exibir anúncios relevantes através do Google AdSense</li>
-            <li>Recomendar livros baseados em seus interesses</li>
-        </ul>
+                <section>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">3. Programa de Afiliados Amazon</h3>
+                    <div class="p-4 bg-orange-50 dark:bg-orange-900/20 rounded-xl border border-orange-200 dark:border-orange-800">
+                        <p class="font-semibold mb-2">⚠️ Aviso Importante</p>
+                        <p>
+                            Este site participa do <strong>Programa de Associados da Amazon Services LLC</strong>, 
+                            um programa de publicidade de afiliados projetado para fornecer um meio para sites ganharem 
+                            taxas de publicidade através de anúncios e links para Amazon.com.br.
+                        </p>
+                        <p class="mt-2">
+                            Como Associado da Amazon, ganhamos com compras qualificadas realizadas através dos links 
+                            presentes neste site.
+                        </p>
+                    </div>
+                </section>
 
-        <div class="highlight-box">
-            <strong>⚠️ Importante:</strong> Não coletamos informações pessoais identificáveis como nome, email ou endereço, a menos que você nos forneça voluntariamente através de formulário de contato.
-        </div>
+                <section>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">4. Google AdSense e Cookies</h3>
+                    <p class="mb-3">
+                        Utilizamos o Google AdSense para exibir anúncios personalizados. O Google pode usar cookies 
+                        para coletar informações sobre suas visitas a este e outros sites para fornecer anúncios 
+                        relevantes sobre produtos e serviços do seu interesse.
+                    </p>
+                    <p>
+                        Você pode desativar o uso de cookies do Google visitando as 
+                        <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer" 
+                           class="text-blue-600 dark:text-blue-400 hover:underline font-semibold">
+                            Configurações de Anúncios do Google
+                        </a>.
+                    </p>
+                </section>
 
-        <h2>3. Google AdSense e Cookies de Publicidade</h2>
-        <p>Este site utiliza o <strong>Google AdSense</strong>, um serviço de publicidade do Google. O AdSense usa cookies para exibir anúncios baseados em suas visitas anteriores a este e outros sites.</p>
-        
-        <p><strong>Como funciona:</strong></p>
-        <ul>
-            <li>O Google usa cookies para rastrear suas preferências e exibir anúncios relevantes</li>
-            <li>Você pode desativar anúncios personalizados visitando as <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener">Configurações de Anúncios do Google</a></li>
-            <li>Também é possível desativar cookies de terceiros nas configurações do seu navegador</li>
-        </ul>
+                <section>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">5. Compartilhamento de Dados</h3>
+                    <p>
+                        Não vendemos, trocamos ou transferimos suas informações pessoais para terceiros, exceto 
+                        conforme descrito nesta política (serviços de terceiros como Amazon e Google).
+                    </p>
+                </section>
 
-        <p>Para mais informações sobre como o Google usa dados de sites que utilizam seus serviços, visite: <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">Como o Google usa dados</a></p>
+                <section>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">6. Links para Sites Externos</h3>
+                    <p>
+                        Nosso site contém links para sites de terceiros, incluindo a Amazon. Não somos responsáveis 
+                        pelas práticas de privacidade ou pelo conteúdo desses sites externos. Recomendamos que você 
+                        leia as políticas de privacidade de cada site que visitar.
+                    </p>
+                </section>
 
-        <h2>4. Programa de Afiliados Amazon Associates</h2>
-        <p>O Páginas Infinitas é participante do <strong>Programa de Associados da Amazon</strong>, um programa de publicidade de afiliados projetado para fornecer links para produtos da Amazon.com.br.</p>
-        
-        <p><strong>O que isso significa:</strong></p>
-        <ul>
-            <li>Ganhamos comissões quando você clica em nossos links e realiza compras na Amazon</li>
-            <li>Isso não aumenta o preço que você paga pelos produtos</li>
-            <li>A Amazon pode usar cookies para rastrear cliques e compras originadas em nosso site</li>
-        </ul>
+                <section>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">7. Seus Direitos</h3>
+                    <p class="mb-3">Você tem o direito de:</p>
+                    <ul class="list-disc list-inside space-y-2 ml-4">
+                        <li>Desativar cookies através das configurações do seu navegador</li>
+                        <li>Optar por não receber anúncios personalizados</li>
+                        <li>Solicitar informações sobre dados coletados por terceiros</li>
+                        <li>Entrar em contato conosco para esclarecimentos sobre privacidade</li>
+                    </ul>
+                </section>
 
-        <h2>5. Cookies e Armazenamento Local</h2>
-        <p>Utilizamos cookies e armazenamento local do navegador (localStorage) para:</p>
-        <ul>
-            <li><strong>Preferências do usuário:</strong> salvar livros favoritos e configurações de visualização</li>
-            <li><strong>Análise de tráfego:</strong> entender quais páginas são mais visitadas</li>
-            <li><strong>Publicidade:</strong> exibir anúncios relevantes através do Google AdSense</li>
-        </ul>
+                <section>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">8. Alterações nesta Política</h3>
+                    <p>
+                        Podemos atualizar esta Política de Privacidade periodicamente. Quaisquer alterações serão 
+                        publicadas nesta página com a data da última atualização.
+                    </p>
+                </section>
 
-        <div class="highlight-box">
-            <strong>🍪 Controle seus cookies:</strong> Você pode desativar cookies a qualquer momento nas configurações do seu navegador. Note que isso pode afetar a funcionalidade do site.
-        </div>
+                <section>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">9. Contato</h3>
+                    <p class="mb-3">
+                        Se você tiver dúvidas sobre esta Política de Privacidade, entre em contato:
+                    </p>
+                    <div class="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-xl border border-blue-200 dark:border-blue-800">
+                        <p class="font-semibold">Email:</p>
+                        <a href="mailto:demetriovianasilva@gmail.com" class="text-blue-600 dark:text-blue-400 hover:underline break-all">
+                            demetriovianasilva@gmail.com
+                        </a>
+                    </div>
+                </section>
 
-        <h2>6. Google Analytics</h2>
-        <p>Utilizamos o Google Analytics para entender como os visitantes interagem com nosso site. Esta ferramenta coleta informações anônimas como:</p>
-        <ul>
-            <li>Número de visitantes</li>
-            <li>Páginas mais acessadas</li>
-            <li>Tempo médio de permanência</li>
-            <li>Origem do tráfego (Google, redes sociais, etc.)</li>
-        </ul>
-        <p>Os dados são anonimizados e não identificam você pessoalmente.</p>
-
-        <h2>7. Links para Sites Externos</h2>
-        <p>Nosso site contém links para outros sites (especialmente Amazon.com.br). Não somos responsáveis pelas práticas de privacidade desses sites. Recomendamos que você leia as políticas de privacidade de cada site que visitar.</p>
-
-        <h2>8. Segurança dos Dados</h2>
-        <p>Implementamos medidas de segurança para proteger as informações coletadas:</p>
-        <ul>
-            <li>Conexão HTTPS criptografada</li>
-            <li>Armazenamento seguro no Firebase (quando aplicável)</li>
-            <li>Acesso restrito a dados de visitantes</li>
-        </ul>
-
-        <h2>9. Seus Direitos (LGPD)</h2>
-        <p>De acordo com a Lei Geral de Proteção de Dados (LGPD), você tem direito a:</p>
-        <ul>
-            <li><strong>Acesso:</strong> solicitar quais dados temos sobre você</li>
-            <li><strong>Correção:</strong> corrigir dados incompletos ou desatualizados</li>
-            <li><strong>Exclusão:</strong> solicitar a remoção de seus dados</li>
-            <li><strong>Portabilidade:</strong> receber seus dados em formato legível</li>
-            <li><strong>Oposição:</strong> opor-se ao tratamento de seus dados</li>
-        </ul>
-
-        <div class="highlight-box">
-            <strong>📧 Exercer seus direitos:</strong> Entre em contato conosco através do email <a href="mailto:demetriovianasilva@gmail.com">demetriovianasilva@gmail.com</a> para qualquer solicitação relacionada aos seus dados.
-        </div>
-
-        <h2>10. Menores de Idade</h2>
-        <p>Nosso site não coleta intencionalmente informações de menores de 13 anos. Se você é pai/mãe ou responsável e acredita que seu filho forneceu dados pessoais, entre em contato conosco imediatamente.</p>
-
-        <h2>11. Alterações nesta Política</h2>
-        <p>Podemos atualizar esta política de privacidade periodicamente. Alterações significativas serão notificadas através de aviso em nosso site. Recomendamos que você revise esta página regularmente.</p>
-
-        <h2>12. Contato</h2>
-        <p>Para dúvidas, sugestões ou solicitações relacionadas a esta política de privacidade, entre em contato:</p>
-        <ul>
-            <li><strong>Email:</strong> <a href="mailto:demetriovianasilva@gmail.com">demetriovianasilva@gmail.com</a></li>
-            <li><strong>Instagram:</strong> <a href="https://www.instagram.com/demetrio_vianas?igsh=bjBxZ2R5bmFxcWxy&utm_source=qr" target="_blank" rel="noopener">@demetrio_vianas</a></li>
-        </ul>
-
-        <h2>13. Consentimento</h2>
-        <p>Ao usar o Páginas Infinitas, você concorda com esta política de privacidade e com o uso de cookies conforme descrito acima.</p>
-
-        <div style="text-align: center; margin-top: 50px;">
-            <a href="index.html" class="btn-home">← Voltar para o Site</a>
+                <section class="pt-6 border-t border-gray-200 dark:border-gray-700">
+                    <p class="text-sm text-gray-500 dark:text-gray-400">
+                        Ao utilizar este site, você concorda com os termos desta Política de Privacidade.
+                    </p>
+                </section>
+            </div>
         </div>
     </main>
 
-    <footer>
-        <p>© 2025 Páginas Infinitas -
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="text-center text-sm text-gray-600 dark:text-gray-400">
+                <p class="mb-2">
+                    <strong>Aviso:</strong> Este site participa do Programa de Associados da Amazon.
+                </p>
+                <p>Como Associado da Amazon, ganho com compras qualificadas.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
