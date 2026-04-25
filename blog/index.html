@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Páginas Infinitas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <header class="glass-effect sticky top-0 z-50 border-b border-gray-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="../index.html" class="text-2xl font-bold gradient-text">Páginas Infinitas</a>
+            <nav class="flex gap-6">
+                <a href="../index.html" class="text-gray-600 hover:text-blue-600 font-medium">Livros</a>
+                <a href="index.html" class="text-blue-600 font-bold border-b-2 border-blue-600">Blog</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-12">
+        <h1 class="text-4xl font-bold text-gray-900 mb-8">Artigos e Postagens</h1>
+        
+        <article class="bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100 mb-8">
+            <div class="p-8">
+                <div class="flex items-center gap-2 mb-4">
+                    <span class="bg-blue-100 text-blue-700 text-xs font-bold px-3 py-1 rounded-full uppercase">Cripto & Investimentos</span>
+                    <span class="text-gray-400 text-sm">25 de Abril, 2026</span>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-900 mb-4">Top 10 Livros sobre Investimentos e Cripto que você precisa ler em 2026</h2>
+                <p class="text-gray-600 leading-relaxed mb-6">
+                    O mercado financeiro está em constante evolução, e 2026 marca um ano de maturidade para os ativos digitais. Se você quer proteger seu patrimônio e entender para onde o dinheiro está fluindo, a educação é o seu melhor ativo. Selecionamos os 10 títulos fundamentais disponíveis no nosso catálogo para transformar sua visão sobre dinheiro.
+                </p>
+                <div class="space-y-4">
+                    <div class="flex items-start gap-4 p-4 bg-gray-50 rounded-xl">
+                        <span class="text-xl font-bold text-blue-600">01.</span>
+                        <div>
+                            <h3 class="font-bold text-gray-900">Bitcoin: A moeda na era digital - Fernando Ulrich</h3>
+                            <p class="text-sm text-gray-500">A base técnica e econômica do BTC explicada de forma magistral.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4 p-4 bg-gray-50 rounded-xl">
+                        <span class="text-xl font-bold text-blue-600">02.</span>
+                        <div>
+                            <h3 class="font-bold text-gray-900">A Psicologia Financeira - Morgan Housel</h3>
+                            <p class="text-sm text-gray-500">Entenda por que o comportamento importa mais do que a técnica.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4 p-4 bg-gray-50 rounded-xl">
+                        <span class="text-xl font-bold text-blue-600">03.</span>
+                        <div>
+                            <h3 class="font-bold text-gray-900">Antifrágil - Nassim Taleb</h3>
+                            <p class="text-sm text-gray-500">Como se beneficiar do caos e da volatilidade do mercado.</p>
+                        </div>
+                    </div>
+                </div>
+                <a href="../index.html" class="inline-block mt-8 bg-blue-600 text-white px-8 py-3 rounded-xl font-bold hover:bg-blue-700 transition-all shadow-lg">Ver Coleção Completa e Comprar</a>
+            </div>
+        </article>
+    </main>
+</body>
+</html>
