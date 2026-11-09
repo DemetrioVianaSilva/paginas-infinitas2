@@ -157,7 +157,10 @@
 <header class="glass-effect dark:glass-effect-dark sticky top-0 z-50 border-b border-gray-200 dark:border-gray-700 shadow-lg">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
         <div class="flex items-center justify-between flex-wrap gap-3">
-            <div class="flex items-center gap-3 animate-fade-in">
+            <div class="flex items-center gap-2 sm:gap-3 animate-fade-in">
+                <button onclick="openMenu()" aria-label="Abrir menu de categorias" title="Categorias" class="p-2 sm:p-3 rounded-xl bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-200 shadow-md">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
                 <div class="p-2 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl shadow-lg">
                     <svg class="w-6 h-6 sm:w-8 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
@@ -274,7 +277,8 @@
     </div>
 
     <!-- Lista de Livros -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+        <div id="resultsBar" class="flex flex-wrap items-center justify-between gap-2 mb-5"></div>
         <div id="booksList"></div>
     </main>
 
@@ -575,6 +579,7 @@
             window.categories.forEach(cat => {
                 select.innerHTML += `<option value="${esc(cat)}">${esc(cat)}</option>`;
             });
+            if (window.renderMenu) window.renderMenu();
         }
 
         window.filterByCategory = function(cat) {
@@ -655,7 +660,7 @@
         window.filterBooks = function() {
             const search = document.getElementById('searchInput').value.toLowerCase();
             const filtered = window.books.filter(book => {
-                const matchesCategory = window.selectedCategory === 'all' || book.category === window.selectedCategory;
+                const matchesCategory = window.matchesCategory(book);
                 const matchesSearch = !search || 
                     book.title.toLowerCase().includes(search) ||
                     book.author.toLowerCase().includes(search) ||
@@ -665,8 +670,81 @@
             renderBooks(filtered);
         };
 
+        // 🧭 Menu lateral e filtros
+        const RECENT = '__recentes';
+        const PRODUCT_CATS = ['Tecnologia', 'Games e consoles', 'Dispositivos Amazon'];
+        function recentIds() {
+            return new Set([...window.books].sort((a, b) => Number(b.id) - Number(a.id)).slice(0, 20).map(b => b.id));
+        }
+        window.matchesCategory = function(book) {
+            const sel = window.selectedCategory;
+            if (sel === 'all') return true;
+            if (sel === RECENT) return recentIds().has(book.id);
+            return book.category === sel;
+        };
+        function categoryLabel(sel) {
+            if (sel === 'all') return 'Todos os itens';
+            if (sel === RECENT) return 'Adicionados recentemente';
+            return sel;
+        }
+        function renderResultsBar(count) {
+            const bar = document.getElementById('resultsBar');
+            if (!bar) return;
+            const search = (document.getElementById('searchInput') || {}).value || '';
+            const filtering = window.selectedCategory !== 'all' || search;
+            bar.innerHTML = `
+                <h2 class="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">${esc(categoryLabel(window.selectedCategory))}
+                    <span class="ml-2 text-sm font-medium text-gray-500 dark:text-gray-400">${count} ${count === 1 ? 'item' : 'itens'}${search ? ' para “' + esc(search) + '”' : ''}</span></h2>
+                ${filtering ? `<button onclick="clearFilters()" class="text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline">Ver todos</button>` : ''}`;
+        }
+        window.clearFilters = function() {
+            const input = document.getElementById('searchInput');
+            if (input) input.value = '';
+            window.filterByCategory('all');
+        };
+        window.renderMenu = function() {
+            const box = document.getElementById('menuContent');
+            if (!box) return;
+            const count = cat => window.books.filter(b => b.category === cat).length;
+            const item = (value, label, n) => {
+                const active = window.selectedCategory === value;
+                return `<button onclick="pickCategory(${value === 'all' ? "'all'" : value === RECENT ? 'RECENT_KEY' : 'window.categories[' + window.categories.indexOf(value) + ']'})"
+                    class="w-full flex items-center justify-between px-5 py-3 text-left text-[15px] ${active ? 'bg-blue-50 dark:bg-gray-800 text-blue-700 dark:text-blue-300 font-semibold' : 'text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800'}">
+                    <span>${esc(label)}</span>${n !== null ? `<span class="text-xs text-gray-500 dark:text-gray-400">${n}</span>` : ''}</button>`;
+            };
+            const section = (title, html) => html ? `<div class="py-2 border-b border-gray-200 dark:border-gray-700"><p class="px-5 pt-2 pb-1 text-base font-bold text-gray-900 dark:text-white">${title}</p>${html}</div>` : '';
+            const bookCats = window.categories.filter(c => !PRODUCT_CATS.includes(c) && count(c) > 0);
+            const prodCats = window.categories.filter(c => PRODUCT_CATS.includes(c) && count(c) > 0);
+            box.innerHTML =
+                section('Destaques', item('all', 'Todos os itens', window.books.length) + item(RECENT, 'Adicionados recentemente', null)) +
+                section('Livros', bookCats.map(c => item(c, c, count(c))).join('')) +
+                section('Tecnologia e entretenimento', prodCats.map(c => item(c, c, count(c))).join('')) +
+                `<div class="py-2">${['<a href="blog/index.html" class="block px-5 py-3 text-[15px] text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800">Blog</a>', '<a href="contato.html" class="block px-5 py-3 text-[15px] text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800">Contato</a>'].join('')}</div>`;
+        };
+        window.RECENT_KEY = RECENT;
+        window.pickCategory = function(cat) {
+            window.filterByCategory(cat);
+            window.closeMenu();
+            const main = document.getElementById('resultsBar');
+            if (main) window.scrollTo({ top: main.getBoundingClientRect().top + window.scrollY - 160, behavior: 'smooth' });
+        };
+        window.openMenu = function() {
+            window.renderMenu();
+            document.getElementById('menuOverlay').classList.remove('hidden');
+            document.getElementById('sideMenu').classList.remove('-translate-x-full');
+            document.body.style.overflow = 'hidden';
+        };
+        window.closeMenu = function() {
+            document.getElementById('menuOverlay').classList.add('hidden');
+            document.getElementById('sideMenu').classList.add('-translate-x-full');
+            document.body.style.overflow = '';
+        };
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') window.closeMenu(); });
+
         function renderBooks(booksToShow = null) {
-            const filtered = booksToShow || window.books.filter(b => window.selectedCategory === 'all' || b.category === window.selectedCategory);
+            let filtered = booksToShow || window.books.filter(b => window.matchesCategory(b));
+            if (window.selectedCategory === RECENT) filtered = [...filtered].sort((a, b) => Number(b.id) - Number(a.id));
+            renderResultsBar(filtered.length);
             const container = document.getElementById('booksList');
             const isDark = document.documentElement.classList.contains('dark');
             
@@ -678,7 +756,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
                             </svg>
                         </div>
-                        <p class="text-gray-500 ${isDark ? 'dark:text-gray-400' : ''} text-xl font-medium">Nenhum livro encontrado</p>
+                        <p class="text-gray-500 ${isDark ? 'dark:text-gray-400' : ''} text-xl font-medium">Nenhum item encontrado</p>
                     </div>
                 `;
                 return;
@@ -853,5 +931,14 @@
         // 🚀 INICIALIZAR
         window.loadData();
     </script>
+    <!-- Menu lateral de categorias -->
+    <div id="menuOverlay" class="hidden fixed inset-0 bg-black bg-opacity-50 z-[60]" onclick="closeMenu()"></div>
+    <aside id="sideMenu" role="dialog" aria-modal="true" aria-label="Categorias" class="fixed top-0 left-0 h-full w-80 max-w-[85vw] bg-white dark:bg-gray-900 shadow-2xl z-[70] transform -translate-x-full transition-transform duration-300 flex flex-col">
+        <div class="gradient-bg text-white px-5 py-4 flex items-center justify-between">
+            <span class="text-lg font-bold">Navegar por categoria</span>
+            <button onclick="closeMenu()" aria-label="Fechar menu" class="text-white text-3xl leading-none px-2">&times;</button>
+        </div>
+        <nav id="menuContent" class="flex-1 overflow-y-auto py-2"></nav>
+    </aside>
 </body>
 </html>
