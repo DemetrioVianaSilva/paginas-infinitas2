@@ -3,10 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meditações de Marco Aurélio: O Manual da Mente Inabalável - Páginas Infinitas</title>
+    <title>Meditações de Marco Aurélio: O Manual da Mente Inabalável - Achados Infinitos</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        tailwind.config = { darkMode: 'class' };
+        tailwind.config = { darkMode: 'class', theme: { extend: { colors: {
+                        blue: {50:'#f0fdf1',100:'#dcfce0',200:'#a7f3b5',300:'#4ade6a',400:'#22c545',500:'#16a336',600:'#15802e',700:'#166528',800:'#145324',900:'#0f3f1c',950:'#052e10'},
+                        indigo: {50:'#f0fdf1',100:'#dcfce0',200:'#a7f3b5',300:'#4ade6a',400:'#22c545',500:'#16a336',600:'#15802e',700:'#166528',800:'#145324',900:'#0f3f1c',950:'#052e10'},
+                        purple: {50:'#f7fee7',100:'#ecfccb',200:'#d9f99d',300:'#bef264',400:'#a3e635',500:'#65a30d',600:'#4d7c0f',700:'#3f6212',800:'#365314',900:'#2a400f',950:'#1a2e05'}
+                    }, } } };
         try { if (localStorage.getItem('darkMode') === 'true') document.documentElement.classList.add('dark'); } catch (e) {}
         function toggleDarkMode() {
             var on = document.documentElement.classList.toggle('dark');
@@ -14,9 +18,9 @@
         }
     </script>
     <style>
-        .gradient-bg { background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%); }
-        .gradient-text { background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        .dark .gradient-text { background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%); -webkit-background-clip: text; background-clip: text; }
+        .gradient-bg { background: linear-gradient(135deg, #15802e 0%, #4d9a12 100%); }
+        .gradient-text { background: linear-gradient(135deg, #15802e 0%, #4d9a12 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .dark .gradient-text { background: linear-gradient(135deg, #4ade6a 0%, #c5f04a 100%); -webkit-background-clip: text; background-clip: text; }
         /* Modo escuro do conteúdo do blog */
         .dark body { background-color: #111827; }
         .dark .bg-white { background-color: #1f2937; }
@@ -26,33 +30,36 @@
         .dark .text-gray-600 { color: #d1d5db; }
         .dark .text-gray-500, .dark .text-gray-400 { color: #9ca3af; }
         .dark .border-gray-100, .dark .border-gray-200 { border-color: #374151; }
-        .dark .bg-blue-50 { background-color: rgba(37,99,235,.15); }
+        .dark .bg-blue-50 { background-color: rgba(22,163,54,.15); }
         .dark .bg-amber-50, .dark .bg-yellow-50, .dark .bg-orange-50 { background-color: rgba(245,158,11,.12); }
         .dark .bg-green-50 { background-color: rgba(34,197,94,.12); }
-        .dark .bg-purple-50 { background-color: rgba(124,58,237,.15); }
-        .dark .text-blue-800, .dark .text-blue-700 { color: #93c5fd; }
-        .dark .text-blue-600 { color: #60a5fa; }
-        .dark .border-blue-600 { border-color: #60a5fa; }
+        .dark .bg-purple-50 { background-color: rgba(132,204,22,.15); }
+        .dark .text-blue-800, .dark .text-blue-700 { color: #86ef9a; }
+        .dark .text-blue-600 { color: #4ade6a; }
+        .dark .border-blue-600 { border-color: #4ade6a; }
         .dark a.bg-white.text-blue-600 { background-color: transparent; }
         .dark .bg-green-100 { background-color: rgba(34,197,94,.2); }
         .dark .text-green-700 { color: #86efac; }
-        .dark .bg-blue-100 { background-color: rgba(37,99,235,.25); }
-        .dark .text-purple-700, .dark .text-purple-800 { color: #c4b5fd; }
+        .dark .bg-blue-100 { background-color: rgba(22,163,54,.25); }
+        .dark .text-purple-700, .dark .text-purple-800 { color: #bef264; }
         .dark .text-amber-800, .dark .text-amber-700, .dark .text-yellow-800, .dark .text-orange-800 { color: #fcd34d; }
     </style>
     <script defer src="/_vercel/insights/script.js"></script>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link rel="icon" href="/favicon.png" type="image/png">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;800&display=swap" rel="stylesheet">
+    <style>.brand-font{font-family:"Outfit",system-ui,sans-serif;letter-spacing:-0.01em}</style>
 </head>
 <body class="bg-gray-50 font-sans">
     <header class="bg-white/95 dark:bg-gray-800/95 backdrop-blur sticky top-0 z-50 border-b border-gray-200 dark:border-gray-700 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
             <div class="flex items-center justify-between gap-3">
-                <a href="../index.html" class="flex items-center gap-2 sm:gap-3" aria-label="Páginas Infinitas – início">
-                    <img src="/logo-icon.png" alt="" width="48" height="48" class="w-10 h-10 sm:w-12 sm:h-12 drop-shadow-md">
+                <a href="../index.html" class="flex items-center gap-2 sm:gap-3" aria-label="Achados Infinitos – início">
+                    <img src="/logo-mark.svg" alt="" width="77" height="48" class="h-9 sm:h-11 w-auto">
                     <div class="leading-tight">
-                        <span class="block text-lg sm:text-2xl font-extrabold tracking-tight"><span class="text-[#0b1f5c] dark:text-white">Páginas</span> <span class="gradient-text">Infinitas</span></span>
-                        <span class="hidden sm:block text-[11px] tracking-wider text-[#0b1f5c]/80 dark:text-gray-300">Aprender • Descobrir • Evoluir</span>
+                        <span class="block text-lg sm:text-2xl font-extrabold tracking-tight brand-font"><span class="text-[#0b2a17] dark:text-white">achados</span> <span class="gradient-text">infinitos</span></span>
+                        <span class="hidden sm:block text-[11px] tracking-wider text-[#0b2a17]/80 dark:text-gray-300">Descubra • Encontre • Aproveite</span>
                     </div>
                 </a>
                 <div class="flex items-center gap-4 sm:gap-6">
@@ -80,7 +87,7 @@
     <main class="max-w-3xl mx-auto px-4 py-12">
         <article class="prose lg:prose-xl mx-auto">
             <h1 class="text-4xl font-extrabold text-gray-900 mb-6">Meditações de Marco Aurélio: Por que o Imperador Romano ainda é o seu melhor Mentor em 2026</h1>
-            <p class="text-gray-500 text-sm mb-8">Publicado em 30 de Abril de 2026 • Por Equipe Páginas Infinitas</p>
+            <p class="text-gray-500 text-sm mb-8">Publicado em 30 de Abril de 2026 • Por Equipe Achados Infinitos</p>
             
             <p class="text-lg text-gray-700 leading-relaxed mb-6">
                 Como um homem que governou o maior império do mundo lidava com o estresse, a traição, as pragas e a pressão constante? A resposta não estava em exércitos, mas em seu diário pessoal: <strong>Meditações</strong>.
@@ -116,7 +123,7 @@
 
     <footer class="bg-white border-t border-gray-200 mt-20">
         <div class="max-w-7xl mx-auto px-4 py-8 text-center text-sm text-gray-500">
-            © 2026 Páginas Infinitas - Como Associado da Amazon, ganho com compras qualificadas.
+            © 2026 Achados Infinitos - Como Associado da Amazon, ganho com compras qualificadas.
         </div>
     </footer>
 </body>
