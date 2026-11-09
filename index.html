@@ -8,6 +8,8 @@
     <link rel="canonical" href="https://paginas-infinitas2.vercel.app/">
     <meta name="theme-color" content="#667eea">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <!-- Vercel Web Analytics (sem cookies); só passa a contar depois de ativado no painel da Vercel -->
+    <script defer src="/_vercel/insights/script.js"></script>
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Páginas Infinitas">
     <meta property="og:title" content="Páginas Infinitas | Livros e achados da Amazon">
@@ -683,7 +685,7 @@
             return book.category === sel;
         };
         function categoryLabel(sel) {
-            if (sel === 'all') return 'Todos os itens';
+            if (sel === 'all') return 'Novidades e mais vendidos';
             if (sel === RECENT) return 'Adicionados recentemente';
             return sel;
         }
@@ -694,7 +696,7 @@
             const filtering = window.selectedCategory !== 'all' || search;
             bar.innerHTML = `
                 <h2 class="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">${esc(categoryLabel(window.selectedCategory))}
-                    <span class="ml-2 text-sm font-medium text-gray-500 dark:text-gray-400">${count} ${count === 1 ? 'item' : 'itens'}${search ? ' para “' + esc(search) + '”' : ''}</span></h2>
+                    <span class="ml-2 text-sm font-medium text-gray-500 dark:text-gray-400">${count} ${count === 1 ? 'item' : 'itens'}${search ? ' para “' + esc(search) + '”' : ' · mais recentes primeiro'}</span></h2>
                 ${filtering ? `<button onclick="clearFilters()" class="text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline">Ver todos</button>` : ''}`;
         }
         window.clearFilters = function() {
@@ -743,7 +745,8 @@
 
         function renderBooks(booksToShow = null) {
             let filtered = booksToShow || window.books.filter(b => window.matchesCategory(b));
-            if (window.selectedCategory === RECENT) filtered = [...filtered].sort((a, b) => Number(b.id) - Number(a.id));
+            filtered = [...filtered].sort((a, b) => Number(b.id) - Number(a.id));
+            const NEW_IDS = recentIds();
             renderResultsBar(filtered.length);
             const container = document.getElementById('booksList');
             const isDark = document.documentElement.classList.contains('dark');
@@ -770,6 +773,7 @@
                 <div onclick="showDetail(${Number(book.id)})" style="animation-delay: ${index * 0.05}s" class="animate-fade-in bg-white ${isDark ? 'dark:bg-gray-800' : ''} rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden cursor-pointer card-hover ${window.viewMode === 'list' ? 'flex gap-4 p-4' : ''}">
                     ${book.image ? `
                         <div class="relative ${window.viewMode === 'list' ? 'w-24 sm:w-32 h-32 sm:h-40 flex-shrink-0' : 'w-full h-64 sm:h-72'}">
+                            ${NEW_IDS.has(book.id) ? '<span class="absolute top-2 left-2 z-10 px-2.5 py-1 rounded-full bg-orange-500 text-white text-xs font-bold shadow">Novidade</span>' : ''}
                             <img src="${safeUrl(book.image)}" alt="${esc(book.title)}" crossorigin="anonymous" loading="lazy"
                                 class="w-full h-full object-cover">
                         </div>
