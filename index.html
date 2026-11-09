@@ -6,8 +6,9 @@
     <title>Páginas Infinitas | Livros e achados da Amazon</title>
     <meta name="description" content="Seleção de livros de finanças, filosofia e desenvolvimento pessoal, além dos mais vendidos da Amazon em livros, tecnologia e games.">
     <link rel="canonical" href="https://paginas-infinitas2.vercel.app/">
-    <meta name="theme-color" content="#667eea">
-    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <meta name="theme-color" content="#2f4fe0">
+    <link rel="icon" href="favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <!-- Vercel Web Analytics (sem cookies); só passa a contar depois de ativado no painel da Vercel -->
     <script defer src="/_vercel/insights/script.js"></script>
     <meta property="og:type" content="website">
@@ -15,7 +16,9 @@
     <meta property="og:title" content="Páginas Infinitas | Livros e achados da Amazon">
     <meta property="og:description" content="Livros que valem a leitura e os mais vendidos da Amazon, escolhidos a dedo.">
     <meta property="og:url" content="https://paginas-infinitas2.vercel.app/">
-    <meta property="og:image" content="https://m.media-amazon.com/images/I/61h7Y-shOZL._SL1303_.jpg">
+    <meta property="og:image" content="https://paginas-infinitas2.vercel.app/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     
     <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1008194171165434"
@@ -122,10 +125,15 @@
             animation: fade-in 0.3s ease-out;
         }
         .gradient-bg {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+        }
+        .dark .gradient-text {
+            background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
         }
         .gradient-text {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -163,12 +171,13 @@
                 <button onclick="openMenu()" aria-label="Abrir menu de categorias" title="Categorias" class="p-2 sm:p-3 rounded-xl bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-200 shadow-md">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                 </button>
-                <div class="p-2 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl shadow-lg">
-                    <svg class="w-6 h-6 sm:w-8 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
-                    </svg>
-                </div>
-                <h1 class="text-xl sm:text-2xl font-bold gradient-text">Páginas Infinitas</h1>
+                <a href="index.html" class="flex items-center gap-2 sm:gap-3" aria-label="Páginas Infinitas – início">
+                    <img src="logo-icon.png" alt="" width="48" height="48" class="w-10 h-10 sm:w-12 sm:h-12 drop-shadow-md">
+                    <div class="leading-tight">
+                        <h1 class="text-lg sm:text-2xl font-extrabold tracking-tight"><span class="text-[#0b1f5c] dark:text-white">Páginas</span> <span class="gradient-text">Infinitas</span></h1>
+                        <p class="hidden sm:block text-[11px] tracking-wider text-[#0b1f5c]/80 dark:text-gray-300">Aprender • Descobrir • Evoluir</p>
+                    </div>
+                </a>
             </div>
             
             <!-- Menu de Navegação -->
