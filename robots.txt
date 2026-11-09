@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://paginas-infinitas2.vercel.app/sitemap.xml
