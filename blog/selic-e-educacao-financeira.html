@@ -5,20 +5,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Selic a 13,75% e a Defesa do Investidor - Páginas Infinitas</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { darkMode: 'class' };
+        try { if (localStorage.getItem('darkMode') === 'true') document.documentElement.classList.add('dark'); } catch (e) {}
+        function toggleDarkMode() {
+            var on = document.documentElement.classList.toggle('dark');
+            try { localStorage.setItem('darkMode', on ? 'true' : 'false'); } catch (e) {}
+        }
+    </script>
     <style>
-        .gradient-text { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .gradient-bg { background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%); }
+        .gradient-text { background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .dark .gradient-text { background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%); -webkit-background-clip: text; background-clip: text; }
+        /* Modo escuro do conteúdo do blog */
+        .dark body { background-color: #111827; }
+        .dark .bg-white { background-color: #1f2937; }
+        .dark .bg-gray-50 { background-color: #111827; }
+        .dark .text-gray-900 { color: #f9fafb; }
+        .dark .text-gray-700 { color: #d1d5db; }
+        .dark .text-gray-600 { color: #d1d5db; }
+        .dark .text-gray-500, .dark .text-gray-400 { color: #9ca3af; }
+        .dark .border-gray-100, .dark .border-gray-200 { border-color: #374151; }
+        .dark .bg-blue-50 { background-color: rgba(37,99,235,.15); }
+        .dark .bg-amber-50, .dark .bg-yellow-50, .dark .bg-orange-50 { background-color: rgba(245,158,11,.12); }
+        .dark .bg-green-50 { background-color: rgba(34,197,94,.12); }
+        .dark .bg-purple-50 { background-color: rgba(124,58,237,.15); }
+        .dark .text-blue-800, .dark .text-blue-700 { color: #93c5fd; }
+        .dark .text-blue-600 { color: #60a5fa; }
+        .dark .border-blue-600 { border-color: #60a5fa; }
+        .dark a.bg-white.text-blue-600 { background-color: transparent; }
+        .dark .bg-green-100 { background-color: rgba(34,197,94,.2); }
+        .dark .text-green-700 { color: #86efac; }
+        .dark .bg-blue-100 { background-color: rgba(37,99,235,.25); }
+        .dark .text-purple-700, .dark .text-purple-800 { color: #c4b5fd; }
+        .dark .text-amber-800, .dark .text-amber-700, .dark .text-yellow-800, .dark .text-orange-800 { color: #fcd34d; }
     </style>
     <script defer src="/_vercel/insights/script.js"></script>
     <link rel="icon" href="/favicon.png" type="image/png">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 </head>
 <body class="bg-gray-50 font-sans">
-    <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-            <a href="../index.html" class="text-2xl font-bold gradient-text">Páginas Infinitas</a>
-            <nav class="flex gap-6">
-                <a href="../index.html" class="text-gray-600 hover:text-blue-600 font-medium">Livros</a>
-                <a href="index.html" class="text-blue-600 font-bold">Blog</a>
+    <header class="bg-white/95 dark:bg-gray-800/95 backdrop-blur sticky top-0 z-50 border-b border-gray-200 dark:border-gray-700 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+            <div class="flex items-center justify-between gap-3">
+                <a href="../index.html" class="flex items-center gap-2 sm:gap-3" aria-label="Páginas Infinitas – início">
+                    <img src="/logo-icon.png" alt="" width="48" height="48" class="w-10 h-10 sm:w-12 sm:h-12 drop-shadow-md">
+                    <div class="leading-tight">
+                        <span class="block text-lg sm:text-2xl font-extrabold tracking-tight"><span class="text-[#0b1f5c] dark:text-white">Páginas</span> <span class="gradient-text">Infinitas</span></span>
+                        <span class="hidden sm:block text-[11px] tracking-wider text-[#0b1f5c]/80 dark:text-gray-300">Aprender • Descobrir • Evoluir</span>
+                    </div>
+                </a>
+                <div class="flex items-center gap-4 sm:gap-6">
+                    <nav class="hidden md:flex items-center gap-6" aria-label="Menu principal">
+                    <a href="../index.html" class=" text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Home</a>
+                    <a href="../blog/index.html" aria-current="page" class=" text-blue-600 dark:text-blue-400 font-bold">Blog</a>
+                    <a href="../contato.html" class=" text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Contato</a>
+                    <a href="../privacidade.html" class=" text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Privacidade</a>
+                    </nav>
+                    <button type="button" onclick="toggleDarkMode()" aria-label="Alternar modo escuro" class="p-2 rounded-xl bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                        <svg class="w-5 h-5 text-yellow-400 hidden dark:block" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"/></svg>
+                        <svg class="w-5 h-5 text-gray-700 block dark:hidden" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/></svg>
+                    </button>
+                </div>
+            </div>
+            <nav class="md:hidden flex items-center justify-center gap-5 mt-3 pt-3 border-t border-gray-200 dark:border-gray-700" aria-label="Menu principal">
+                    <a href="../index.html" class="text-sm text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Home</a>
+                    <a href="../blog/index.html" aria-current="page" class="text-sm text-blue-600 dark:text-blue-400 font-bold">Blog</a>
+                    <a href="../contato.html" class="text-sm text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Contato</a>
+                    <a href="../privacidade.html" class="text-sm text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Privacidade</a>
             </nav>
         </div>
     </header>
