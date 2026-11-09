@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://paginas-infinitas2.vercel.app/</loc><changefreq>daily</changefreq><priority>1.0</priority></url>
+  <url><loc>https://paginas-infinitas2.vercel.app/blog/</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://paginas-infinitas2.vercel.app/blog/selic-e-educacao-financeira.html</loc><priority>0.6</priority></url>
+  <url><loc>https://paginas-infinitas2.vercel.app/blog/meditacoes-marco-aurelio.html</loc><priority>0.6</priority></url>
+  <url><loc>https://paginas-infinitas2.vercel.app/contato.html</loc><priority>0.3</priority></url>
+  <url><loc>https://paginas-infinitas2.vercel.app/privacidade.html</loc><priority>0.3</priority></url>
+</urlset>
