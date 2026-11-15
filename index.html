@@ -25,40 +25,7 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1008194171165434"
          crossorigin="anonymous"></script>
     
-    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        blue: {50:'#f0fdf1',100:'#dcfce0',200:'#a7f3b5',300:'#4ade6a',400:'#22c545',500:'#16a336',600:'#15802e',700:'#166528',800:'#145324',900:'#0f3f1c',950:'#052e10'},
-                        indigo: {50:'#f0fdf1',100:'#dcfce0',200:'#a7f3b5',300:'#4ade6a',400:'#22c545',500:'#16a336',600:'#15802e',700:'#166528',800:'#145324',900:'#0f3f1c',950:'#052e10'},
-                        purple: {50:'#f7fee7',100:'#ecfccb',200:'#d9f99d',300:'#bef264',400:'#a3e635',500:'#65a30d',600:'#4d7c0f',700:'#3f6212',800:'#365314',900:'#2a400f',950:'#1a2e05'}
-                    },
-                    animation: {
-                        'fade-in': 'fadeIn 0.3s ease-in-out',
-                        'slide-up': 'slideUp 0.3s ease-out',
-                        'scale-in': 'scaleIn 0.2s ease-out'
-                    },
-                    keyframes: {
-                        fadeIn: {
-                            '0%': { opacity: '0' },
-                            '100%': { opacity: '1' }
-                        },
-                        slideUp: {
-                            '0%': { transform: 'translateY(20px)', opacity: '0' },
-                            '100%': { transform: 'translateY(0)', opacity: '1' }
-                        },
-                        scaleIn: {
-                            '0%': { transform: 'scale(0.95)', opacity: '0' },
-                            '100%': { transform: 'scale(1)', opacity: '1' }
-                        }
-                    }
-                }
-            }
-        }
-    </script>
+    <link rel="stylesheet" href="/assets/site.css">
     <style>
         * {
             -webkit-tap-highlight-color: transparent;
@@ -476,6 +443,33 @@
             console.log('💾 Salvando...');
             try {
                 if (isFirebaseReady) {
+                    // 🛡️ Trava contra apagar a lista sem querer
+                    const before = window.__serverBookCount || 0;
+                    const after = Array.isArray(window.books) ? window.books.length : 0;
+                    if (after === 0 || (before >= 10 && after < before * 0.5)) {
+                        if (!confirm(`Atenção: a lista vai passar de ${before} para ${after} produtos. Deseja mesmo salvar?`)) {
+                            console.warn('Salvamento cancelado pela trava de segurança.');
+                            return;
+                        }
+                    }
+                    // 🗂️ Backup diário automático antes de salvar (backups/AAAA-MM-DD)
+                    try {
+                        const [prevBooks, prevCats] = await Promise.all([
+                            get(ref(database, 'books')),
+                            get(ref(database, 'categories'))
+                        ]);
+                        const day = new Date().toISOString().slice(0, 10);
+                        const already = await get(ref(database, 'backups/' + day + '/savedAt'));
+                        if (prevBooks.exists() && !already.exists()) {
+                            await set(ref(database, 'backups/' + day), {
+                                savedAt: Date.now(),
+                                books: prevBooks.val(),
+                                categories: prevCats.exists() ? prevCats.val() : null
+                            });
+                        }
+                    } catch (e) {
+                        console.warn('Backup não realizado:', e);
+                    }
                     await Promise.all([
                         set(ref(database, 'books'), window.books),
                         set(ref(database, 'categories'), window.categories)
@@ -498,6 +492,7 @@
                 if (snapshot.exists()) {
                     const data = snapshot.val();
                     const newBooks = Array.isArray(data) ? data.filter(Boolean) : Object.values(data || {});
+                    window.__serverBookCount = newBooks.length;
                     if (JSON.stringify(newBooks) !== JSON.stringify(window.books)) {
                         console.log('🔄 Atualização em tempo real!');
                         window.books = newBooks;
