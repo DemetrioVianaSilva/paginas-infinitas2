@@ -687,6 +687,7 @@
         // 🧭 Menu lateral e filtros
         const RECENT = '__recentes';
         const PRODUCT_CATS = ['Tecnologia', 'Games e consoles', 'Dispositivos Amazon'];
+        const HOME_CATS = ['Bebês e Fraldas', 'Limpeza', 'Casa'];
         function recentIds() {
             return new Set([...window.books].sort((a, b) => Number(b.id) - Number(a.id)).slice(0, 20).map(b => b.id));
         }
@@ -727,11 +728,13 @@
                     <span>${esc(label)}</span>${n !== null ? `<span class="text-xs text-gray-500 dark:text-gray-400">${n}</span>` : ''}</button>`;
             };
             const section = (title, html) => html ? `<div class="py-2 border-b border-gray-200 dark:border-gray-700"><p class="px-5 pt-2 pb-1 text-base font-bold text-gray-900 dark:text-white">${title}</p>${html}</div>` : '';
-            const bookCats = window.categories.filter(c => !PRODUCT_CATS.includes(c) && count(c) > 0);
+            const bookCats = window.categories.filter(c => !PRODUCT_CATS.includes(c) && !HOME_CATS.includes(c) && count(c) > 0);
+            const homeCats = window.categories.filter(c => HOME_CATS.includes(c) && count(c) > 0);
             const prodCats = window.categories.filter(c => PRODUCT_CATS.includes(c) && count(c) > 0);
             box.innerHTML =
                 section('Destaques', item('all', 'Todos os itens', window.books.length) + item(RECENT, 'Adicionados recentemente', null)) +
                 section('Livros', bookCats.map(c => item(c, c, count(c))).join('')) +
+                section('Casa e dia a dia', homeCats.map(c => item(c, c, count(c))).join('')) +
                 section('Tecnologia e entretenimento', prodCats.map(c => item(c, c, count(c))).join('')) +
                 `<div class="py-2">${['<a href="blog/index.html" class="block px-5 py-3 text-[15px] text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800">Blog</a>', '<a href="contato.html" class="block px-5 py-3 text-[15px] text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800">Contato</a>'].join('')}</div>`;
         };
