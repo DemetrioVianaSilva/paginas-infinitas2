@@ -688,6 +688,12 @@
         const RECENT = '__recentes';
         const PRODUCT_CATS = ['Tecnologia', 'Games e consoles', 'Dispositivos Amazon'];
         const HOME_CATS = ['Bebês e Fraldas', 'Limpeza', 'Casa'];
+        // Grupos do menu: clicar no título mostra todos os itens do grupo
+        const GROUPS = {
+            '__grupo_livros': { label: 'Livros', test: c => !PRODUCT_CATS.includes(c) && !HOME_CATS.includes(c) },
+            '__grupo_casa': { label: 'Casa e dia a dia', test: c => HOME_CATS.includes(c) },
+            '__grupo_tec': { label: 'Tecnologia e entretenimento', test: c => PRODUCT_CATS.includes(c) }
+        };
         function recentIds() {
             return new Set([...window.books].sort((a, b) => Number(b.id) - Number(a.id)).slice(0, 20).map(b => b.id));
         }
@@ -695,11 +701,13 @@
             const sel = window.selectedCategory;
             if (sel === 'all') return true;
             if (sel === RECENT) return recentIds().has(book.id);
+            if (GROUPS[sel]) return GROUPS[sel].test(book.category);
             return book.category === sel;
         };
         function categoryLabel(sel) {
             if (sel === 'all') return 'Novidades e mais vendidos';
             if (sel === RECENT) return 'Adicionados recentemente';
+            if (GROUPS[sel]) return GROUPS[sel].label + ' · todos';
             return sel;
         }
         function renderResultsBar(count) {
@@ -728,14 +736,23 @@
                     <span>${esc(label)}</span>${n !== null ? `<span class="text-xs text-gray-500 dark:text-gray-400">${n}</span>` : ''}</button>`;
             };
             const section = (title, html) => html ? `<div class="py-2 border-b border-gray-200 dark:border-gray-700"><p class="px-5 pt-2 pb-1 text-base font-bold text-gray-900 dark:text-white">${title}</p>${html}</div>` : '';
+            const groupSection = (key, cats) => {
+                if (!cats.length) return '';
+                const g = GROUPS[key];
+                const total = window.books.filter(b => g.test(b.category)).length;
+                const active = window.selectedCategory === key;
+                const head = `<button onclick="pickCategory('${key}')" class="w-full flex items-center justify-between px-5 pt-3 pb-2 text-left text-base font-bold ${active ? 'text-blue-700 dark:text-blue-300' : 'text-gray-900 dark:text-white'} hover:bg-gray-100 dark:hover:bg-gray-800">
+                    <span>${esc(g.label)} <span class="ml-1 text-xs font-medium text-blue-600 dark:text-blue-400">Ver todos ›</span></span><span class="text-xs font-medium text-gray-500 dark:text-gray-400">${total}</span></button>`;
+                return `<div class="py-2 border-b border-gray-200 dark:border-gray-700">${head}${cats.map(c => item(c, c, count(c))).join('')}</div>`;
+            };
             const bookCats = window.categories.filter(c => !PRODUCT_CATS.includes(c) && !HOME_CATS.includes(c) && count(c) > 0);
             const homeCats = window.categories.filter(c => HOME_CATS.includes(c) && count(c) > 0);
             const prodCats = window.categories.filter(c => PRODUCT_CATS.includes(c) && count(c) > 0);
             box.innerHTML =
                 section('Destaques', item('all', 'Todos os itens', window.books.length) + item(RECENT, 'Adicionados recentemente', null)) +
-                section('Livros', bookCats.map(c => item(c, c, count(c))).join('')) +
-                section('Casa e dia a dia', homeCats.map(c => item(c, c, count(c))).join('')) +
-                section('Tecnologia e entretenimento', prodCats.map(c => item(c, c, count(c))).join('')) +
+                groupSection('__grupo_livros', bookCats) +
+                groupSection('__grupo_casa', homeCats) +
+                groupSection('__grupo_tec', prodCats) +
                 `<div class="py-2">${['<a href="blog/index.html" class="block px-5 py-3 text-[15px] text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800">Blog</a>', '<a href="contato.html" class="block px-5 py-3 text-[15px] text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800">Contato</a>'].join('')}</div>`;
         };
         window.RECENT_KEY = RECENT;
